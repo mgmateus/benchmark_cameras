@@ -1,0 +1,24 @@
+name: cam_tester
+root: ./
+startup_window: zedm_wrapper
+windows:
+
+  - zedm_wrapper: 
+      layout: tiled
+      panes:
+        - roslaunch zed_wrapper zedm.launch
+        
+  - rosbag: 
+      layout: tiled
+      panes:
+        - sleep 10; cd ../rosbag/zedm; rosbag record rosbag record /clicked_point /diagnostics /tf /tf_static /zedm/joint_states /zedm/zed_node/confidence/confidence_map /zedm/zed_node/depth/camera_info /zedm/zed_node/depth/depth_registered /zedm/zed_node/disparity/disparity_image /zedm/zed_node/left/camera_info /zedm/zed_node/left/image_rect_color /zedm/zed_node/left/image_rect_gray /zedm/zed_node/left_raw/camera_info /zedm/zed_node/left_raw/image_raw_color /zedm/zed_node/mapping/fused_cloud /zedm/zed_node/odom /zedm/zed_node/parameter_descriptions /zedm/zed_node/parameter_updates /zedm/zed_node/path_map /zedm/zed_node/path_odom /zedm/zed_node/plane /zedm/zed_node/plane_marker /zedm/zed_node/point_cloud/cloud_registered /zedm/zed_node/pose /zedm/zed_node/pose_with_covariance /zedm/zed_node/rgb/camera_info /zedm/zed_node/rgb/image_rect_color /zedm/zed_node/rgb/image_rect_gray /zedm/zed_node/rgb_raw/camera_info /zedm/zed_node/rgb_raw/image_raw_color /zedm/zed_node/rgb_raw/image_raw_gray /zedm/zed_node/right/camera_info /zedm/zed_node/right/image_rect_color /zedm/zed_node/right_raw/image_raw_gray /zedm/zed_node/stereo/image_rect_color /zedm/zed_node/stereo_raw/image_raw_color -o $flag -o $flag
+        
+  - ros_kill: 
+      layout: tiled
+      panes:
+        - sleep 40; pkill ros; ./get_current_bag.sh zedm; pkill tmux         
+        
+        
+
+
+  

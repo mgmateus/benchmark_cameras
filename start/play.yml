@@ -1,0 +1,25 @@
+name: hydrone_navigation
+root: ./
+startup_window: rosbag
+windows:
+
+  - roscore: 
+      layout: tiled
+      panes:
+        - roscore
+        
+  - rosbag: 
+      layout: tiled
+      panes:
+        - sleep 8; cd ../rosbag
+        
+  - ws: 
+      layout: tiled
+      panes:
+        - sleep 8;        
+        
+        
+        
+
+
+  

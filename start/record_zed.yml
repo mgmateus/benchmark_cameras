@@ -1,0 +1,24 @@
+name: cam_tester
+root: ./
+startup_window: rosbag
+windows:
+
+  - zed_wrapper: 
+      layout: tiled
+      panes:
+        - roslaunch zed_wrapper zed.launch
+        
+  - rosbag: 
+      layout: tiled
+      panes:
+        - sleep 10; cd ../rosbag/zed; rosbag record /clicked_point /diagnostics /tf /tf_static /zed/joint_states /zed/zed_node/confidence/confidence_map /zed/zed_node/depth/camera_info /zed/zed_node/depth/depth_registered /zed/zed_node/disparity/disparity_image /zed/zed_node/left/camera_info /zed/zed_node/left/image_rect_color /zed/zed_node/left/image_rect_gray /zed/zed_node/left_raw/camera_info /zed/zed_node/left_raw/image_raw_color /zed/zed_node/mapping/fused_cloud /zed/zed_node/odom /zed/zed_node/parameter_descriptions /zed/zed_node/parameter_updates /zed/zed_node/path_map /zed/zed_node/path_odom /zed/zed_node/plane /zed/zed_node/plane_marker /zed/zed_node/point_cloud/cloud_registered /zed/zed_node/pose /zed/zed_node/pose_with_covariance /zed/zed_node/rgb/camera_info /zed/zed_node/rgb/image_rect_color /zed/zed_node/rgb/image_rect_gray /zed/zed_node/rgb_raw/camera_info /zed/zed_node/rgb_raw/image_raw_color /zed/zed_node/rgb_raw/image_raw_gray /zed/zed_node/right/camera_info /zed/zed_node/right/image_rect_color /zed/zed_node/right_raw/image_raw_gray /zed/zed_node/stereo/image_rect_color /zed/zed_node/stereo_raw/image_raw_color -o $flag
+        
+  - ros_kill: 
+      layout: tiled
+      panes:
+        - sleep 40; pkill ros; ./get_current_bag.sh zed; pkill tmux         
+        
+        
+
+
+  

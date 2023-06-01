@@ -1,0 +1,24 @@
+name: cam_tester
+root: ./
+startup_window: rs_wrapper
+windows:
+
+  - rs_wrapper: 
+      layout: tiled
+      panes:
+        - roslaunch realsense2_camera rs_camera.launch filters:=pointcloud depth_width:=424 depth_height:=240 color_width:=424 color_height:=240 depth_fps:=15 color_fps:=15 ordened_pc:=true
+        
+  - rosbag: 
+      layout: tiled
+      panes:
+        - sleep 10; cd ../rosbag/realsense; rosbag record /camera/color/camera_info /camera/color/image_raw /camera/color/metadata /camera/depth/camera_info /camera/depth/color/points /camera/depth/image_rect_raw /camera/depth/metadata /camera/extrinsics/depth_to_color /camera/motion_module/parameter_descriptions /camera/motion_module/parameter_updates /camera/pointcloud/parameter_descriptions /camera/pointcloud/parameter_updates /camera/realsense2_camera_manager/bond /camera/rgb_camera/auto_exposure_roi/parameter_descriptions /camera/rgb_camera/auto_exposure_roi/parameter_updates /camera/rgb_camera/parameter_descriptions /camera/rgb_camera/parameter_updates /camera/stereo_module/auto_exposure_roi/parameter_descriptions /camera/stereo_module/auto_exposure_roi/parameter_updates /camera/stereo_module/parameter_descriptions /camera/stereo_module/parameter_updates /diagnostics /tf /tf_static -o $flag
+        
+  - ros_kill: 
+      layout: tiled
+      panes:
+        - sleep 40; pkill ros; ./get_current_bag.sh realsense; pkill tmux         
+        
+        
+
+
+  
